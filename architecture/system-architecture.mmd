@@ -1,0 +1,18 @@
+graph TD
+    %% System Architecture Diagram
+    Witness[Witness Description Text] --> NLP[Module 1: NLU Engine]
+    NLP --> JSON[Structured Facial Attributes JSON]
+    JSON --> Enc[Module 2: Attribute Encoder]
+    Enc --> Latent[Latent Embeddings Vector w]
+    Latent --> Gen[Module 3: Face Generator]
+    Gen --> Photo[Photorealistic Generated Face]
+    Photo --> Render[Module 4: Sketch Renderer]
+    Render --> Sketch[Forensic Sketch Output]
+    
+    %% Verification Loop
+    Photo --> Eval[Module 5: Identity Evaluator - ArcFace]
+    GTPhoto[Ground Truth Photo] --> Eval
+    Eval --> CosSim[Cosine Similarity Score]
+    
+    classDef module fill:#e1f5fe,stroke:#039be5,stroke-width:2px;
+    class NLP,Enc,Gen,Render,Eval module;\n

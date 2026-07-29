@@ -1,0 +1,11 @@
+graph LR
+    %% Inference Flow
+    Start([Witness Text Description]) --> Parse[NLU Text Parser]
+    Parse --> Map[Latent Space Mapping]
+    Map --> Gen[Face Generation]
+    Gen --> Style[Sketch Style Translation]
+    Style --> Show[Display Sketch]
+    Show --> Dec{Witness Approved?}
+    Dec -- No --> Edit[Update Attribute Description]
+    Edit --> Map
+    Dec -- Yes --> End([Final Forensic Sketch])\n

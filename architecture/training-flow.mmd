@@ -1,0 +1,16 @@
+graph TD
+    %% Training Flow Diagram
+    CelebA[CelebA Dataset: Photos & Attributes] --> Pre[Data Preprocessing]
+    FFHQ[FFHQ Dataset: High-res Photos] --> Pre
+    
+    Pre --> NLPTrain[Train NLP Extractor / Parser]
+    Pre --> GenTrain[Train Generator: StyleGAN2/Diffusion]
+    
+    NLPTrain --> NLPWeights[NLP Model Weights]
+    GenTrain --> GenWeights[Generator Weights]
+    
+    NLPWeights --> Target[Target Attribute Mapping]
+    GenWeights --> Target
+    
+    style CelebA fill:#f9f,stroke:#333,stroke-width:2px
+    style FFHQ fill:#f9f,stroke:#333,stroke-width:2px\n

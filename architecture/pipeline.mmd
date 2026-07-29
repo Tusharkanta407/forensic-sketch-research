@@ -1,0 +1,22 @@
+sequenceDiagram
+    autonumber
+    actor Witness
+    actor Officer as Investigation Officer
+    participant NLU as Module 1: NLU Parser
+    participant Enc as Module 2: Encoder
+    participant Gen as Module 3: Generator
+    participant Rend as Module 4: Sketch Renderer
+    
+    Witness->>Officer: Verbal Description
+    Officer->>NLU: Inputs Text String
+    NLU->>NLU: Parses text into JSON attributes
+    NLU->>Enc: Sends JSON Map
+    Enc->>Enc: Projects attributes to StyleGAN Latent Space
+    Enc->>Gen: Sends Latent Vector (w)
+    Gen->>Gen: Generates Photo-realistic Face
+    Gen->>Rend: Sends Photo
+    Rend->>Rend: Converts Photo to Forensic Pencil Sketch
+    Rend->>Officer: Displays Forensic Sketch
+    Officer->>Witness: Shows Sketch for Review
+    Witness-->>Officer: Feedback: "Make eyes smaller, age older"
+    Officer->>NLU: Inputs modifications\n
