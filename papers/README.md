@@ -4,10 +4,18 @@ Every paper reviewed by the team must be summarized using the template below to 
 
 ## 📝 Documented Papers
 
-* 📄 **[Attention Is All You Need](./attention-is-all-you-need.md)** — Transformer architecture, self-attention mechanisms.
-* 📄 **[ArcFace](./arcface.md)** — Angular margin face recognition, identity evaluation.
-* 📄 **[FaceNet](./facenet.md)** — Triplet loss embeddings, face verification.
-* 📄 **[StyleGAN2](./stylegan2.md)** — Demodulated weights, high-quality face generation.
+* 📄 **Attention Is All You Need** — Transformer architecture, self-attention mechanisms.
+  * [Paper Summary](./attention-is-all-you-need.md) | [Download PDF](./attention-is-all-you-need.pdf)
+* 📄 **ArcFace** — Angular margin face recognition, identity evaluation.
+  * [Paper Summary](./arcface.md) | [Download PDF](./arcface.pdf)
+* 📄 **FaceNet** — Triplet loss embeddings, face verification.
+  * [Paper Summary](./facenet.md) | [Download PDF](./facenet.pdf)
+* 📄 **StyleGAN2** — Demodulated weights, high-quality face generation.
+  * [Paper Summary](./stylegan2.md) | [Download PDF](./stylegan2.pdf)
+* 📄 **StyleGAN (StyleGAN1)** — Style-based generator architecture.
+  * [Download PDF](./stylegan.pdf)
+* 📄 **Pix2Pix** — Image-to-image translation with conditional adversarial networks.
+  * [Download PDF](./pix2pix.pdf)
 
 ---
 

@@ -73,12 +73,21 @@ graph TD
 
 ## 🧩 Core Research Modules
 
-The project is broken down into five core research modules:
+The research work is structured into five core modules. Below is a comparative matrix outlining their inputs, outputs, and candidate technologies:
 
-### [Module 1: Natural Language Understanding](./prototypes/parser/)
-Translates unstructured textual witness descriptions into a structured attribute format.
-* **Input:** *"Male, around 35, oval face, brown eyes, scar on left cheek"*
-* **Output (JSON):**
+| Module | Module Name | Primary Input | Primary Output | Candidate Technology Stack | Research Scope |
+| :---: | :--- | :--- | :--- | :--- | :--- |
+| **1** | **[Natural Language Understanding](./prototypes/parser/)** | Natural language text from witness description | Structured facial attributes dictionary (JSON) | Fine-tuned DistilBERT, custom self-attention parser, zero-shot LLM | Parsing unstructured witness descriptions to extract specific facial characteristics. |
+| **2** | **[Attribute Encoding](./prototypes/parser/)** | Structured attributes JSON | Numerical latent mapping vector ($w \in \mathcal{W}$) | Fully connected MLP mapper, linear projection matrices | Translating parsed attributes into vector spaces compatible with generative models. |
+| **3** | **[Face Generation](./prototypes/generator/)** | Numerical latent vectors ($w$) | Photorealistic suspect face image | StyleGAN2-ADA, StyleGAN3, Latent Diffusion Models (LDM) | Generating high-fidelity facial images aligned with the encoded attributes. |
+| **4** | **[Sketch Rendering](./prototypes/sketch/)** | Generated photorealistic face image | Forensic-style hand-drawn pencil sketch | OpenCV edge shaders, Neural Style Transfer (NST), Pix2Pix, CycleGAN | Translating photorealistic face images into high-quality artistic forensic sketches. |
+| **5** | **[Identity Evaluation](./prototypes/arcface/)** | Generated sketch & Ground truth photo | Cosine similarity preservation score | Pre-trained ArcFace (ResNet-100), FaceNet, metric learning | Measuring identity preservation across domain shifts (photo to sketch). |
+
+### 📝 Example Input/Output & Evaluation Flows
+
+#### Module 1: NLU Text Parsing Example
+* **Input Text:** *"Male, around 35, oval face, brown eyes, scar on left cheek"*
+* **Output Structured JSON:**
   ```json
   {
     "gender": "male",
@@ -89,19 +98,7 @@ Translates unstructured textual witness descriptions into a structured attribute
   }
   ```
 
-### [Module 2: Attribute Encoding](./prototypes/parser/)
-Converts the structured description JSON into numerical vectors/latents that the generation model can consume.
-
-### [Module 3: Face Generation](./prototypes/generator/)
-Generates a highly plausible photo-realistic face based on the extracted attribute embeddings.
-* *Possible models under research:* Conditional GANs, StyleGAN2/3, Latent Diffusion Models (LDM).
-
-### [Module 4: Sketch Rendering](./prototypes/sketch/)
-Converts the generated photorealistic face into a forensic-style sketch.
-* *Possible methods:* OpenCV edge/pencil shaders, Neural Style Transfer (NST), Pix2Pix.
-
-### [Module 5: Evaluation](./prototypes/arcface/)
-Quantifies how well the generated sketch preserves identity compared to the ground-truth photo.
+#### Module 5: Identity Evaluation Flow
 ```mermaid
 graph TD
     GenFace[Generated Face] --> FaceRec1[Face Recognition Model] --> Embed1[Embedding Vector 1]
@@ -141,12 +138,14 @@ graph LR
 * 📄 **[README.md](./README.md)** — Lab overview, team roles, core modules, and roadmap.
 * 📂 **[docs/](./docs/)** — Detailed research documentation.
   * [problem-statement.md](./docs/problem-statement.md) | [literature-review.md](./docs/literature-review.md) | [research-roadmap.md](./docs/research-roadmap.md) | [datasets.md](./docs/datasets.md) | [evaluation.md](./docs/evaluation.md) | [meeting-notes.md](./docs/meeting-notes.md) | [glossary.md](./docs/glossary.md)
-* 📂 **[papers/](./papers/)** — Structured reviews of core papers.
+* 📂 **[papers/](./papers/)** — Structured reviews and PDFs of core papers.
   * [README.md](./papers/README.md) | [attention-is-all-you-need.md](./papers/attention-is-all-you-need.md) | [arcface.md](./papers/arcface.md) | [facenet.md](./papers/facenet.md) | [stylegan2.md](./papers/stylegan2.md)
 * 📂 **[architecture/](./architecture/)** — Mermaid diagram source files.
   * [system-architecture.mmd](./architecture/system-architecture.mmd) | [pipeline.mmd](./architecture/pipeline.mmd) | [training-flow.mmd](./architecture/training-flow.mmd) | [inference-flow.mmd](./architecture/inference-flow.mmd)
 * 📂 **[datasets/](./datasets/)** — Dataset documentation and preprocessing scripts.
-  * [celeba.md](./datasets/celeba.md) | [ffhq.md](./datasets/ffhq.md) | [forensic-datasets.md](./datasets/forensic-datasets.md) | [preprocessing.md](./datasets/preprocessing.md)
+  * [celeba.md](./datasets/celeba.md) | [ffhq.md](./datasets/ffhq.md) | [forensic-datasets.md](./datasets/forensic-datasets.md) | [customizable-dataset.md](./datasets/customizable-dataset.md) | [preprocessing.md](./datasets/preprocessing.md)
+* 📂 **[paper-implementations/](./paper-implementations/)** — Standalone empty skeleton templates for team algorithm implementations.
+  * [attention.py](./paper-implementations/attention.py) | [arcface.py](./paper-implementations/arcface.py) | [facenet.py](./paper-implementations/facenet.py) | [stylegan2.py](./paper-implementations/stylegan2.py)
 * 📂 **[experiments/](./experiments/)** — Sandbox directories for experimental configurations and logs.
   * [experiment-001-arcface/](./experiments/experiment-001-arcface/) | [experiment-002-generator/](./experiments/experiment-002-generator/) | [experiment-003-sketch/](./experiments/experiment-003-sketch/) | [logs.md](./experiments/logs.md)
 * 📂 **[prototypes/](./prototypes/)** — Early phase scripts, notebooks, and models.

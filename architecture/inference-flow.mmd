@@ -1,3 +1,6 @@
+%% IMPORTANT: This is the demo architecture showing how you can write in the MMD file.
+%% You must follow this rule and write like this.
+
 graph LR
     %% Inference Flow
     Start([Witness Text Description]) --> Parse[NLU Text Parser]
@@ -8,4 +11,4 @@ graph LR
     Show --> Dec{Witness Approved?}
     Dec -- No --> Edit[Update Attribute Description]
     Edit --> Map
-    Dec -- Yes --> End([Final Forensic Sketch])\n
+    Dec -- Yes --> End([Final Forensic Sketch])
