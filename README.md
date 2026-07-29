@@ -1,77 +1,124 @@
+<h1 align="center">
+  🧬 Forensic Sketch Generator
+</h1>
+
 <p align="center">
-  <img src="./assets/hero-banner.png" alt="Forensic Sketch Generator — Research Lab" width="100%"/>
+  <strong>Research Lab&nbsp;&nbsp;·&nbsp;&nbsp;Team Notebook&nbsp;&nbsp;·&nbsp;&nbsp;Experiment Journal</strong>
 </p>
 
-<h1 align="center">Forensic Sketch Generator</h1>
-<p align="center"><em>Research Lab ✦ Team Notebook ✦ Experiment Journal</em></p>
+<p align="center">
+  <a href="https://github.com/Sradha2474/Forensic-Sketch-Generator"><img src="https://img.shields.io/badge/▶_Main_Repo-000000?style=for-the-badge&logo=github&logoColor=white" alt="Main Repo"/></a>&nbsp;
+  <a href="./docs/research-roadmap.md"><img src="https://img.shields.io/badge/Roadmap-6C3483?style=for-the-badge&logo=target&logoColor=white" alt="Roadmap"/></a>&nbsp;
+  <a href="./papers/"><img src="https://img.shields.io/badge/Papers-1A5276?style=for-the-badge&logo=readthedocs&logoColor=white" alt="Papers"/></a>&nbsp;
+  <a href="./tasks/ownership.md"><img src="https://img.shields.io/badge/Team_Roles-117A65?style=for-the-badge&logo=people&logoColor=white" alt="Team Roles"/></a>
+</p>
 
 <p align="center">
-  <a href="https://github.com/Sradha2474/Forensic-Sketch-Generator">◈ Main Repo</a>&nbsp;&nbsp;·&nbsp;&nbsp;
-  <a href="./docs/research-roadmap.md">◈ Roadmap</a>&nbsp;&nbsp;·&nbsp;&nbsp;
-  <a href="./papers/">◈ Papers</a>&nbsp;&nbsp;·&nbsp;&nbsp;
-  <a href="./tasks/ownership.md">◈ Team Roles</a>
+  <img src="https://img.shields.io/badge/python-3.10+-3776AB?style=flat-square&logo=python&logoColor=white"/>
+  <img src="https://img.shields.io/badge/PyTorch-2.0+-EE4C2C?style=flat-square&logo=pytorch&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Status-Active_Research-brightgreen?style=flat-square"/>
+  <img src="https://img.shields.io/badge/License-MIT-blue?style=flat-square"/>
 </p>
 
 ---
 
-### ⟐ What is this?
+### What is this?
 
 This is our team's research notebook — not production code.
 
-We use this repo to read papers, sketch out architectures, run experiments, log findings, and stay aligned as a team. Think of it as our shared lab journal.
+We read papers here, sketch architectures, run experiments, log findings, and stay aligned. Think of it as our shared lab journal.
 
-The actual production codebase lives here → **[Forensic-Sketch-Generator](https://github.com/Sradha2474/Forensic-Sketch-Generator)**
+Production codebase lives here → **[Forensic-Sketch-Generator](https://github.com/Sradha2474/Forensic-Sketch-Generator)**
 
 ---
 
-### ⟐ The Problem
+### The Problem
 
-Forensic sketch creation still depends on a trained artist sitting with a witness for hours, drawing and redrawing based on verbal descriptions. It's slow, subjective, hard to scale, and bottlenecked by artist availability.
+Forensic sketch creation still depends on a trained artist sitting with a witness for hours. It's slow, subjective, hard to scale, and bottlenecked by artist availability.
 
 We're building an AI system that takes a witness's natural language description and generates a forensic-quality sketch — with iterative refinement until the witness approves.
 
-> The keyword is **assist**, not replace. This tool supports investigators, it doesn't make legal decisions.
+> **Assist**, not replace. This tool supports investigators, it doesn't make legal decisions.
 
 ---
 
-### ⟐ How It Works
+### How It Works
 
 ```mermaid
 graph TD
-    A[Crime Occurs] --> B[Witness Describes Suspect]
-    B --> C[AI Parses Description]
-    C --> D[Extracts Facial Attributes]
-    D --> E[Generates Face]
-    E --> F[Renders as Sketch]
-    F --> G[Witness Reviews]
-    G --> H{Good enough?}
-    H -- No --> I[Witness gives feedback]
+    A["🔊 Crime Occurs"] --> B["🗣️ Witness Describes Suspect"]
+    B --> C["🧠 AI Parses Description"]
+    C --> D["📋 Extracts Facial Attributes"]
+    D --> E["🎨 Generates Face"]
+    E --> F["✏️ Renders as Sketch"]
+    F --> G["👁️ Witness Reviews"]
+    G --> H{"✅ Good enough?"}
+    H -- No --> I["🔄 Witness gives feedback"]
     I --> D
-    H -- Yes --> J[Final Sketch]
+    H -- Yes --> J["🏁 Final Sketch"]
 
-    style J fill:#a5d6a7,stroke:#2e7d32,stroke-width:2px
+    style J fill:#a5d6a7,stroke:#2e7d32,stroke-width:2px,color:#1b5e20
+    style A fill:#ef9a9a,stroke:#c62828,stroke-width:2px,color:#b71c1c
+    style C fill:#90caf9,stroke:#1565c0,stroke-width:2px
+    style E fill:#ce93d8,stroke:#7b1fa2,stroke-width:2px
+    style F fill:#ffcc80,stroke:#e65100,stroke-width:2px
 ```
 
 ---
 
-### ⟐ Research Modules
+### Research Modules
 
-Our pipeline breaks down into five modules. Each one is a separate research problem.
+Our pipeline is five separate research problems:
 
-<p align="center">
-  <img src="./assets/module-pipeline.png" alt="Module Pipeline" width="80%"/>
-</p>
+<table>
+  <tr>
+    <td align="center"><img src="https://img.shields.io/badge/Module_1-NLU_Parser-FF6F00?style=for-the-badge" alt="M1"/></td>
+    <td>Turns witness text → structured JSON attributes</td>
+    <td><code>DistilBERT</code> · <code>Self-Attention</code> · <code>Zero-shot LLMs</code></td>
+  </tr>
+  <tr>
+    <td align="center"><img src="https://img.shields.io/badge/Module_2-Encoder-FF8F00?style=for-the-badge" alt="M2"/></td>
+    <td>Maps JSON features → latent vectors</td>
+    <td><code>MLP Mappers</code> · <code>Projection Layers</code></td>
+  </tr>
+  <tr>
+    <td align="center"><img src="https://img.shields.io/badge/Module_3-Generator-7B1FA2?style=for-the-badge" alt="M3"/></td>
+    <td>Synthesizes photorealistic face from latents</td>
+    <td><code>StyleGAN2-ADA</code> · <code>Diffusion Models</code></td>
+  </tr>
+  <tr>
+    <td align="center"><img src="https://img.shields.io/badge/Module_4-Sketch_Renderer-1565C0?style=for-the-badge" alt="M4"/></td>
+    <td>Converts photo → pencil-style forensic sketch</td>
+    <td><code>OpenCV</code> · <code>NST</code> · <code>Pix2Pix</code></td>
+  </tr>
+  <tr>
+    <td align="center"><img src="https://img.shields.io/badge/Module_5-Evaluator-2E7D32?style=for-the-badge" alt="M5"/></td>
+    <td>Checks identity preservation vs ground truth</td>
+    <td><code>ArcFace</code> · <code>FaceNet</code> · <code>Cosine Similarity</code></td>
+  </tr>
+</table>
 
-| ⬡ | Module | What it does | We're exploring |
-|:---:|--------|-------------|-----------------|
-| ① | **NLU Parser** | Turns witness text into structured JSON attributes | DistilBERT, self-attention, zero-shot LLMs |
-| ② | **Attribute Encoder** | Maps JSON features to latent vectors | MLP mappers, projection layers |
-| ③ | **Face Generator** | Synthesizes a photorealistic face from latents | StyleGAN2-ADA, Diffusion Models |
-| ④ | **Sketch Renderer** | Converts the photo into a pencil-style forensic sketch | OpenCV, Neural Style Transfer, Pix2Pix |
-| ⑤ | **Identity Evaluator** | Checks if the sketch preserves identity vs ground truth | ArcFace, FaceNet, cosine similarity |
+```mermaid
+flowchart LR
+    A["🗣️ Text"] --> B["🧠 NLU"]
+    B --> C["🔢 Encoder"]
+    C --> D["🎨 Generator"]
+    D --> E["✏️ Sketch"]
+    E --> F["📄 Output"]
+    D -. "🔍 Identity Check" .-> G["🛡️ Evaluator"]
+    G -. "Score" .-> D
+
+    style A fill:#FF6F00,color:#fff
+    style B fill:#FF8F00,color:#fff
+    style C fill:#F9A825,color:#000
+    style D fill:#7B1FA2,color:#fff
+    style E fill:#1565C0,color:#fff
+    style F fill:#2E7D32,color:#fff
+    style G fill:#00695C,color:#fff
+```
 
 <details>
-<summary><strong>▹ Example: NLU Parser input → output</strong></summary>
+<summary><strong>↳ Example: NLU Parser input → output</strong></summary>
 <br/>
 
 **Input:**
@@ -91,87 +138,124 @@ Our pipeline breaks down into five modules. Each one is a separate research prob
 
 ---
 
-### ⟐ Repo Structure
+### Repo Structure
 
-Click any folder to browse it directly.
+Click any folder to browse it.
 
-| | Folder | What's inside |
-|:---:|--------|--------------|
-| ◉ | [**`docs/`**](./docs/) | Problem statement, literature review, roadmap, evaluation metrics, glossary |
-| ◉ | [**`papers/`**](./papers/) | Paper summaries + downloaded PDFs — ArcFace, StyleGAN2, FaceNet, Attention, Pix2Pix |
-| ◉ | [**`architecture/`**](./architecture/) | Mermaid diagrams — system overview, training flow, inference pipeline |
-| ◉ | [**`datasets/`**](./datasets/) | Dataset docs for CelebA, FFHQ, CUHK, and preprocessing pipelines |
-| ◉ | [**`paper-implementations/`**](./paper-implementations/) | Our from-scratch implementations of core paper algorithms |
-| ◉ | [**`experiments/`**](./experiments/) | Experiment logs, configs, and results — organized per experiment |
-| ◉ | [**`prototypes/`**](./prototypes/) | Sandbox code — notebooks, quick tests, early-stage modules |
-| ◉ | [**`tasks/`**](./tasks/) | Sprint plans, backlog, and task ownership matrix |
-| ◉ | [**`resources/`**](./resources/) | Books, YouTube links, GitHub repos, and references we find useful |
+<table>
+  <tr>
+    <td><a href="./docs/"><img src="https://img.shields.io/badge/📂_docs-4A148C?style=flat-square" alt="docs"/></a></td>
+    <td>Problem statement, literature review, roadmap, evaluation metrics, glossary</td>
+  </tr>
+  <tr>
+    <td><a href="./papers/"><img src="https://img.shields.io/badge/📂_papers-1A237E?style=flat-square" alt="papers"/></a></td>
+    <td>Paper summaries + PDFs — ArcFace, StyleGAN2, FaceNet, Attention, Pix2Pix</td>
+  </tr>
+  <tr>
+    <td><a href="./architecture/"><img src="https://img.shields.io/badge/📂_architecture-004D40?style=flat-square" alt="architecture"/></a></td>
+    <td>Mermaid diagrams — system overview, training flow, inference pipeline</td>
+  </tr>
+  <tr>
+    <td><a href="./datasets/"><img src="https://img.shields.io/badge/📂_datasets-BF360C?style=flat-square" alt="datasets"/></a></td>
+    <td>CelebA, FFHQ, CUHK dataset docs and preprocessing pipelines</td>
+  </tr>
+  <tr>
+    <td><a href="./paper-implementations/"><img src="https://img.shields.io/badge/📂_paper--implementations-E65100?style=flat-square" alt="paper-implementations"/></a></td>
+    <td>From-scratch implementations of core paper algorithms</td>
+  </tr>
+  <tr>
+    <td><a href="./experiments/"><img src="https://img.shields.io/badge/📂_experiments-6A1B9A?style=flat-square" alt="experiments"/></a></td>
+    <td>Experiment logs, configs, results — organized per experiment</td>
+  </tr>
+  <tr>
+    <td><a href="./prototypes/"><img src="https://img.shields.io/badge/📂_prototypes-283593?style=flat-square" alt="prototypes"/></a></td>
+    <td>Sandbox code — notebooks, quick tests, early-stage modules</td>
+  </tr>
+  <tr>
+    <td><a href="./tasks/"><img src="https://img.shields.io/badge/📂_tasks-1B5E20?style=flat-square" alt="tasks"/></a></td>
+    <td>Sprint plans, backlog, task ownership</td>
+  </tr>
+  <tr>
+    <td><a href="./resources/"><img src="https://img.shields.io/badge/📂_resources-37474F?style=flat-square" alt="resources"/></a></td>
+    <td>Books, YouTube, GitHub repos, references</td>
+  </tr>
+</table>
 
 ---
 
-### ⟐ Roadmap
+### Roadmap
 
 ```mermaid
 graph LR
-    subgraph Phase 1
-        A[Literature Review] --> B[Dataset Setup]
+    subgraph "Phase 1 🔬"
+        A["Literature Review"] --> B["Dataset Setup"]
     end
-    subgraph Phase 2
-        B --> C[Text-to-Attribute Parser]
+    subgraph "Phase 2 🧠"
+        B --> C["Text-to-Attribute Parser"]
     end
-    subgraph Phase 3
-        C --> D[Face Generation Prototypes]
+    subgraph "Phase 3 🎨"
+        C --> D["Face Generation Prototypes"]
     end
-    subgraph Phase 4
-        D --> E[Sketch Rendering]
-        D --> F[Identity Evaluation]
+    subgraph "Phase 4 ✏️"
+        D --> E["Sketch Rendering"]
+        D --> F["Identity Evaluation"]
     end
-    subgraph Phase 5
-        E --> G[Integration into Main Repo]
+    subgraph "Phase 5 🚀"
+        E --> G["Main Repo Integration"]
         F --> G
     end
+
+    style A fill:#E8EAF6,stroke:#3F51B5
+    style B fill:#E8EAF6,stroke:#3F51B5
+    style C fill:#EDE7F6,stroke:#7B1FA2
+    style D fill:#F3E5F5,stroke:#9C27B0
+    style E fill:#E0F2F1,stroke:#00695C
+    style F fill:#E0F2F1,stroke:#00695C
+    style G fill:#C8E6C9,stroke:#2E7D32,stroke-width:3px
 ```
 
 ---
 
-### ⟐ Team
+### Team
 
 <table>
   <tr>
     <td align="center">
       <a href="https://github.com/Sradha2474">
         <img src="https://github.com/Sradha2474.png" width="100" height="100" style="border-radius:50%;" alt="Sradha"/><br/>
-        <strong>Sradha</strong>
+        <sub><strong>Sradha</strong></sub>
       </a>
     </td>
     <td align="center">
       <a href="https://github.com/Tusharkanta407">
         <img src="https://github.com/Tusharkanta407.png" width="100" height="100" style="border-radius:50%;" alt="Tushar"/><br/>
-        <strong>Tushar</strong>
+        <sub><strong>Tushar</strong></sub>
       </a>
     </td>
     <td align="center">
       <a href="https://github.com/sandeepswain54">
         <img src="https://github.com/sandeepswain54.png" width="100" height="100" style="border-radius:50%;" alt="Sandeep"/><br/>
-        <strong>Sandeep</strong>
+        <sub><strong>Sandeep</strong></sub>
       </a>
     </td>
   </tr>
 </table>
 
-Detailed role assignments → [**tasks/ownership.md**](./tasks/ownership.md)
+Role assignments → [**tasks/ownership.md**](./tasks/ownership.md)
 
 ---
 
-### ⟐ How We Work
+### How We Work
 
-- ▸ **Experiments** go in [`experiments/`](./experiments/) — one folder per experiment, each with an objective, results, and next steps.
-- ▸ **Paper reviews** follow a consistent template — see [`papers/README.md`](./papers/README.md) for the format.
-- ▸ **No random files** in root. Prototypes live in [`prototypes/`](./prototypes/), scratch code stays in experiments.
-- ▸ **Sprint tracking** happens in [`tasks/`](./tasks/) — we update before each weekly sync.
+- **Experiments** go in [`experiments/`](./experiments/) — one folder per experiment with objective, results, next steps.
+- **Paper reviews** follow the template in [`papers/README.md`](./papers/README.md).
+- **No random files** in root. Prototypes → [`prototypes/`](./prototypes/). Scratch code → experiments.
+- **Sprint tracking** in [`tasks/`](./tasks/) — updated before each weekly sync.
 
 ---
 
 <p align="center">
-  <em>MIT License — see the LICENSE file in our <a href="https://github.com/Sradha2474/Forensic-Sketch-Generator">main repo</a>.</em>
+  <img src="https://img.shields.io/badge/License-MIT-blue?style=flat-square"/>
+  &nbsp;
+  <a href="https://github.com/Sradha2474/Forensic-Sketch-Generator"><img src="https://img.shields.io/badge/Production_Repo-→-black?style=flat-square&logo=github" alt="Production Repo"/></a>
 </p>
