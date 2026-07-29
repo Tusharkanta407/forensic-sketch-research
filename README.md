@@ -1,93 +1,94 @@
-# 🔍 Forensic Sketch Generator — Research Lab
+# Forensic Sketch Generator — Research Lab
 
-Welcome to the **Forensic Sketch Generator Research Lab** repository. This is our team's central research notebook, experimental laboratory, and academic review library.
+Welcome to our research lab and notebook. This repository serves as our team's collaborative workspace for model exploration, paper reviews, dataset preparation, and experimental logging.
 
-> [!IMPORTANT]
-> **Repository Purpose:** This repository is strictly for research, experiments, documentation, datasets, architecture diagrams, paper summaries, prototypes, and team journals.
-> Production-ready codebase, web interface, and final implementations live in our main repository: 🔗 **[Forensic-Sketch-Generator (Main Repo)](https://github.com/Sradha2474/Forensic-Sketch-Generator)**.
-
----
-
-## 💡 Vision
-To **assist** investigators in rapidly generating, refining, and evaluating forensic sketches from witness descriptions using artificial intelligence. 
-*Note: The system is designed to support investigators and forensic artists, not to replace them or make legal decisions.*
+> [!NOTE]
+> **Workspace Scope:** We use this repository exclusively for research, literature analysis, architectural planning, and algorithmic prototyping. Our production codebase, frontend interface, and deployment assets are maintained in our main repository: **[Forensic-Sketch-Generator (Main Repo)](https://github.com/Sradha2474/Forensic-Sketch-Generator)**.
 
 ---
 
-## ❓ Problem Statement
-Every year, thousands of criminal investigations begin with nothing more than a witness's memory. Traditional forensic sketch creation depends heavily on a trained forensic artist who interviews the witness and gradually creates a suspect sketch. This process has several challenges:
-* 🕒 **Time-consuming:** Revisions and back-and-forth take days.
-* 🎓 **High Skill Required:** Requires highly trained forensic artists.
-* 🗣️ **Communication Barriers:** Quality depends heavily on witness recollection/articulation.
-* 🎨 **Subjective Quality:** Results vary widely between artists.
-* 📉 **Scalability:** Hard to scale when multiple investigations require sketches concurrently.
-
-As a result, valuable investigation time can be lost during the early stages of an investigation.
+## Vision
+Our goal is to build an AI-assisted system that converts natural language witness descriptions into realistic forensic sketches, allowing for iterative refinement and identity-preserving evaluation. We focus on assisting forensic investigators and artists rather than replacing them.
 
 ---
 
-## 🎯 Project Goals
-The goal is to build an AI-assisted system that converts witness descriptions into realistic forensic sketches while allowing iterative refinement and objective evaluation:
-1. **Understand** natural language witness descriptions.
-2. **Extract** structured facial attributes.
-3. **Generate** an initial suspect face.
-4. **Allow** iterative refinement based on witness feedback.
-5. **Evaluate** how closely the generated sketch resembles the ground-truth face during research experiments (for model evaluation, not suspect identification).
-6. **Provide** investigators with an accelerating tool.
+## Problem Statement
+Every year, thousands of criminal investigations begin with only a witness's memory. Traditional forensic sketch creation relies on a trained artist interviewing the witness and iteratively drawing the suspect. This manual process faces several challenges:
+* **Time-consuming:** Revisions can take days.
+* **Skill Scarcity:** Trained forensic artists are not always readily available.
+* **Subjective Interpretation:** Results vary depending on the artist's style and communication efficiency.
+* **Scalability Limitations:** Local departments often cannot scale sketch creation during high-demand periods.
+
+We aim to bridge this gap by providing an interactive, AI-driven generation tool that speeds up the initial sketching phase.
 
 ---
 
-## 🔄 Workflow Comparison
+## Proposed AI-Assisted Workflow
 
 ```mermaid
 graph TD
-    %% Existing Workflow
-    subgraph Existing Workflow
-        A1[Crime Occurs] --> B1[Witness Recalls]
-        B1 --> C1[Police Interview]
-        C1 --> D1[Forensic Artist Interview]
-        D1 --> E1[Manual Sketch Creation]
-        E1 --> F1[Revision Cycles]
-        F1 --> G1[Final Hand-drawn Sketch]
-    end
+    %% Workflow Diagram
+    A[Crime Occurs] --> B[Witness Text Description]
+    B --> C[NLU Parsing Engine]
+    C --> D[Facial Attribute Extraction]
+    D --> E[Generative Face model]
+    E --> F[Forensic Sketch Translation]
+    F --> G[Witness Feedback & Review]
+    G --> H{Revisions Needed?}
+    H -- Yes --> I[Update Description Details]
+    I --> D
+    H -- No --> J[Final Approved Sketch]
 
-    %% Proposed Workflow
-    subgraph Proposed AI-Assisted Workflow
-        A2[Crime Occurs] --> B2[Witness Description]
-        B2 --> C2[AI NLP System]
-        C2 --> D2[Facial Attribute Extraction]
-        D2 --> E2[Face Generator]
-        E2 --> F2[Generated Sketch]
-        F2 --> G2[Witness Feedback]
-        G2 --> H2{Refinement Needed?}
-        H2 -- Yes --> I2[Adjust Attributes]
-        I2 --> E2
-        H2 -- No --> J2[Final Approved Sketch]
-    end
-
-    style G1 fill:#ff9999,stroke:#333,stroke-width:2px
-    style J2 fill:#99ff99,stroke:#333,stroke-width:2px
+    style J fill:#a5d6a7,stroke:#2e7d32,stroke-width:2px
+    style G fill:#ffcc80,stroke:#ef6c00,stroke-width:2px
 ```
 
 ---
 
-## 🧩 Core Research Modules
+## Core Research Modules
+We partition our research and model development into five modular components:
 
-The research work is structured into five core modules. Below is a comparative matrix outlining their inputs, outputs, and candidate technologies:
+```mermaid
+flowchart TD
+    subgraph Inputs["Witness Description Input"]
+        Text["Natural Language Description<br><i>'Male, around 35, oval face...'</i>"]
+    end
 
-| Module | Module Name | Primary Input | Primary Output | Candidate Technology Stack | Research Scope |
-| :---: | :--- | :--- | :--- | :--- | :--- |
-| **1** | **[Natural Language Understanding](./prototypes/parser/)** | Natural language text from witness description | Structured facial attributes dictionary (JSON) | Fine-tuned DistilBERT, custom self-attention parser, zero-shot LLM | Parsing unstructured witness descriptions to extract specific facial characteristics. |
-| **2** | **[Attribute Encoding](./prototypes/parser/)** | Structured attributes JSON | Numerical latent mapping vector ($w \in \mathcal{W}$) | Fully connected MLP mapper, linear projection matrices | Translating parsed attributes into vector spaces compatible with generative models. |
-| **3** | **[Face Generation](./prototypes/generator/)** | Numerical latent vectors ($w$) | Photorealistic suspect face image | StyleGAN2-ADA, StyleGAN3, Latent Diffusion Models (LDM) | Generating high-fidelity facial images aligned with the encoded attributes. |
-| **4** | **[Sketch Rendering](./prototypes/sketch/)** | Generated photorealistic face image | Forensic-style hand-drawn pencil sketch | OpenCV edge shaders, Neural Style Transfer (NST), Pix2Pix, CycleGAN | Translating photorealistic face images into high-quality artistic forensic sketches. |
-| **5** | **[Identity Evaluation](./prototypes/arcface/)** | Generated sketch & Ground truth photo | Cosine similarity preservation score | Pre-trained ArcFace (ResNet-100), FaceNet, metric learning | Measuring identity preservation across domain shifts (photo to sketch). |
+    subgraph Mod1["Module 1: Natural Language Understanding"]
+        NLU["NLU Text Parser<br><i>(Extracts Named Facial Features)</i>"]
+    end
 
-### 📝 Example Input/Output & Evaluation Flows
+    subgraph Mod2["Module 2: Attribute Encoding"]
+        Enc["Attribute Encoder<br><i>(Maps JSON to Latent Spaces)</i>"]
+    end
 
-#### Module 1: NLU Text Parsing Example
-* **Input Text:** *"Male, around 35, oval face, brown eyes, scar on left cheek"*
-* **Output Structured JSON:**
+    subgraph Mod3["Module 3: Face Generation"]
+        Gen["Generative Model<br><i>(Synthesizes Photorealistic Image)</i>"]
+    end
+
+    subgraph Mod4["Module 4: Sketch Styling"]
+        Style["Sketch Renderer<br><i>(Style Transfer & Edge Processing)</i>"]
+    end
+
+    subgraph Mod5["Module 5: Identity Evaluation"]
+        Eval["Verification Engine<br><i>(ArcFace Embeddings Comparison)</i>"]
+    end
+
+    %% Flow connections
+    Text --> NLU
+    NLU -- "Structured JSON" --> Enc
+    Enc -- "Latent Vector (w)" --> Gen
+    Gen -- "Photo Output" --> Style
+    Style -- "Sketch Output" --> Final["Forensic Sketch"]
+
+    %% Evaluation & Identity preservation loop
+    Gen -. "Identity Check" .-> Eval
+    Eval -. "Cosine Similarity Score" .-> Gen
+```
+
+### Module 1 Parse Example
+* **Input Description:** *"Male, around 35, oval face, brown eyes, scar on left cheek"*
+* **Parsed Output (JSON):**
   ```json
   {
     "gender": "male",
@@ -98,79 +99,42 @@ The research work is structured into five core modules. Below is a comparative m
   }
   ```
 
-#### Module 5: Identity Evaluation Flow
-```mermaid
-graph TD
-    GenFace[Generated Face] --> FaceRec1[Face Recognition Model] --> Embed1[Embedding Vector 1]
-    OrigFace[Original Face] --> FaceRec2[Face Recognition Model] --> Embed2[Embedding Vector 2]
-    Embed1 & Embed2 --> SimScore[Cosine Similarity Metric]
-```
+---
+
+## Research Directory Map
+We organize our workspace directory structure by research scope and file type to maintain a clean environment:
+
+| Directory | Scope & Purpose |
+| :--- | :--- |
+| **`docs/`** | Comprehensive problem analysis, roadmaps, literature review papers, and dataset briefs. |
+| **`papers/`** | Repository of academic PDFs (StyleGAN2, ArcFace, Attention, etc.) and structured summary files. |
+| **`architecture/`** | Sequence diagrams, training schedules, and inference pipelines represented in Mermaid formats. |
+| **`datasets/`** | Preprocessing scripts, data annotation schemas, and configuration for CelebA and FFHQ. |
+| **`paper-implementations/`** | Standalone boilerplate scripts for building and testing core paper layers from scratch. |
+| **`experiments/`** | Tracking logs, configuration variables, training performance checkpoints, and metrics. |
+| **`prototypes/`** | Jupyter Notebook playgrounds, sandbox models, and scratch preprocessing scripts. |
+| **`tasks/`** | Sprint plans, backlog charts, and task allocation metrics. |
+| **`resources/`** | Reading lists, video tutorials, external Git repositories, and web link bookmarks. |
 
 ---
 
-## 🗺️ Research Roadmap
+## Active Research Team
+We coordinate our tasks, review milestones, and discuss architecture decisions collectively.
 
-```mermaid
-graph LR
-    subgraph Phase 1: Foundation
-        R1[Literature Review] --> R2[Dataset Selection & Setup]
-    end
-    subgraph Phase 2: NLP & Extraction
-        R2 --> R3[Text-to-Attribute Parsing]
-    end
-    subgraph Phase 3: Generative Modeling
-        R3 --> R4[StyleGAN/Diffusion Prototypes]
-    end
-    subgraph Phase 4: Sketch & Eval
-        R4 --> R5[Sketch Rendering NST]
-        R4 --> R6[ArcFace Identity Evaluation]
-    end
-    subgraph Phase 5: Core Integration
-        R5 --> R7[Main Repo Integration]
-        R6 --> R7
-    end
-```
-
----
-
-## 📁 Repository Structure
-
-* 📄 **[README.md](./README.md)** — Lab overview, team roles, core modules, and roadmap.
-* 📂 **[docs/](./docs/)** — Detailed research documentation.
-  * [problem-statement.md](./docs/problem-statement.md) | [literature-review.md](./docs/literature-review.md) | [research-roadmap.md](./docs/research-roadmap.md) | [datasets.md](./docs/datasets.md) | [evaluation.md](./docs/evaluation.md) | [meeting-notes.md](./docs/meeting-notes.md) | [glossary.md](./docs/glossary.md)
-* 📂 **[papers/](./papers/)** — Structured reviews and PDFs of core papers.
-  * [README.md](./papers/README.md) | [attention-is-all-you-need.md](./papers/attention-is-all-you-need.md) | [arcface.md](./papers/arcface.md) | [facenet.md](./papers/facenet.md) | [stylegan2.md](./papers/stylegan2.md)
-* 📂 **[architecture/](./architecture/)** — Mermaid diagram source files.
-  * [system-architecture.mmd](./architecture/system-architecture.mmd) | [pipeline.mmd](./architecture/pipeline.mmd) | [training-flow.mmd](./architecture/training-flow.mmd) | [inference-flow.mmd](./architecture/inference-flow.mmd)
-* 📂 **[datasets/](./datasets/)** — Dataset documentation and preprocessing scripts.
-  * [celeba.md](./datasets/celeba.md) | [ffhq.md](./datasets/ffhq.md) | [forensic-datasets.md](./datasets/forensic-datasets.md) | [customizable-dataset.md](./datasets/customizable-dataset.md) | [preprocessing.md](./datasets/preprocessing.md)
-* 📂 **[paper-implementations/](./paper-implementations/)** — Standalone empty skeleton templates for team algorithm implementations.
-  * [attention.py](./paper-implementations/attention.py) | [arcface.py](./paper-implementations/arcface.py) | [facenet.py](./paper-implementations/facenet.py) | [stylegan2.py](./paper-implementations/stylegan2.py)
-* 📂 **[experiments/](./experiments/)** — Sandbox directories for experimental configurations and logs.
-  * [experiment-001-arcface/](./experiments/experiment-001-arcface/) | [experiment-002-generator/](./experiments/experiment-002-generator/) | [experiment-003-sketch/](./experiments/experiment-003-sketch/) | [logs.md](./experiments/logs.md)
-* 📂 **[prototypes/](./prototypes/)** — Early phase scripts, notebooks, and models.
-  * [attention/](./prototypes/attention/) | [arcface/](./prototypes/arcface/) | [generator/](./prototypes/generator/) | [parser/](./prototypes/parser/) | [sketch/](./prototypes/sketch/)
-* 📂 **[tasks/](./tasks/)** — Task management and sprints.
-  * [backlog.md](./tasks/backlog.md) | [sprint-01.md](./tasks/sprint-01.md) | [sprint-02.md](./tasks/sprint-02.md) | [ownership.md](./tasks/ownership.md)
-* 📂 **[resources/](./resources/)** — Learning links, references, and references.
-  * [books.md](./resources/books.md) | [github-links.md](./resources/github-links.md) | [youtube.md](./resources/youtube.md) | [references.md](./resources/references.md)
-
----
-
-## 👥 Meet the Research Team
-
-We are a collaborative group of researchers and engineers. Below are our roles, focus areas, and primary contributions. Detailed task lists can be found in [tasks/ownership.md](./tasks/ownership.md).
-
-| Profile Picture | Member Name | Role | Primary Responsibilities | Contact |
+| Profile Picture | Researcher | Role | Core Responsibility | GitHub Profile |
 | :---: | :--- | :--- | :--- | :---: |
-| <img src="https://github.com/Sradha2474.png" width="80" height="80" style="border-radius:50%; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" alt="Shraddha Avatar"/> | **Shraddha** | **Project Lead & Architect** | Overall architecture design, direction, team coordination, code review integration. | [@Sradha2474](https://github.com/Sradha2474) |
-| <img src="https://github.com/Tusharkanta407.png" width="80" height="80" style="border-radius:50%; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" alt="Tushar Avatar"/> | **Tushar** | **Research Lead** | Paper analysis, mathematical review, prototype drafting, core documentation. | [@Tusharkanta407](https://github.com/Tusharkanta407) |
-| <img src="https://github.com/sandeepswain54.png" width="80" height="80" style="border-radius:50%; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" alt="Sandeep Avatar"/> | **Sandeep** | **ML Engineer** | Experiment execution, training loops, model testing, dataset preprocessing support. | [@sandeepswain54](https://github.com/sandeepswain54) |
+| <img src="https://github.com/Sradha2474.png" width="80" height="80" style="border-radius:50%; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" alt="Sradha Avatar"/> | **Sradha** | *TBD* | *TBD* | [@Sradha2474](https://github.com/Sradha2474) |
+| <img src="https://github.com/Tusharkanta407.png" width="80" height="80" style="border-radius:50%; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" alt="Tushar Avatar"/> | **Tushar** | *TBD* | *TBD* | [@Tusharkanta407](https://github.com/Tusharkanta407) |
+| <img src="https://github.com/sandeepswain54.png" width="80" height="80" style="border-radius:50%; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" alt="Sandeep Avatar"/> | **Sandeep** | *TBD* | *TBD* | [@sandeepswain54](https://github.com/sandeepswain54) |
 
 ---
 
-## 🤝 Collaboration Guidelines
+## Collaboration Guidelines
+1. **Commit Hygiene:** We keep our model experiments inside `experiments/` and clean prototypes in `prototypes/`. We do not dump raw files in the root directory.
+2. **Reviewing Papers:** When we review a new paper, we update the `papers/README.md` index and write a summary following our markdown template.
+3. **Tracking Sprints:** We update task statuses inside `tasks/` before weekly alignment syncs.
 
-1. **Keep Code clean:** Avoid dumping raw, unorganized python files in root directories. Use [experiments/](./experiments/) for training logs and [prototypes/](./prototypes/) for sandbox models.
-2. **Document Everything:** Every new paper reviewed should follow the template defined in [papers/README.md](./papers/README.md).
-3. **Verify via Logs:** When completing an experiment, add a brief log entry in [experiments/logs.md](./experiments/logs.md) and reference the specific experiment folder.\n
+---
+
+## License
+We license this research notebook under the **MIT License**. For details, see the LICENSE file in our main repository.
