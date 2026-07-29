@@ -1,140 +1,181 @@
-# Forensic Sketch Generator — Research Lab
+<p align="center">
+  <strong>Forensic Sketch Generator</strong><br/>
+  <em>Research Lab & Team Notebook</em>
+</p>
 
-Welcome to our research lab and notebook. This repository serves as our team's collaborative workspace for model exploration, paper reviews, dataset preparation, and experimental logging.
-
-> [!NOTE]
-> **Workspace Scope:** We use this repository exclusively for research, literature analysis, architectural planning, and algorithmic prototyping. Our production codebase, frontend interface, and deployment assets are maintained in our main repository: **[Forensic-Sketch-Generator (Main Repo)](https://github.com/Sradha2474/Forensic-Sketch-Generator)**.
-
----
-
-## Vision
-Our goal is to build an AI-assisted system that converts natural language witness descriptions into realistic forensic sketches, allowing for iterative refinement and identity-preserving evaluation. We focus on assisting forensic investigators and artists rather than replacing them.
-
----
-
-## Problem Statement
-Every year, thousands of criminal investigations begin with only a witness's memory. Traditional forensic sketch creation relies on a trained artist interviewing the witness and iteratively drawing the suspect. This manual process faces several challenges:
-* **Time-consuming:** Revisions can take days.
-* **Skill Scarcity:** Trained forensic artists are not always readily available.
-* **Subjective Interpretation:** Results vary depending on the artist's style and communication efficiency.
-* **Scalability Limitations:** Local departments often cannot scale sketch creation during high-demand periods.
-
-We aim to bridge this gap by providing an interactive, AI-driven generation tool that speeds up the initial sketching phase.
+<p align="center">
+  <a href="https://github.com/Sradha2474/Forensic-Sketch-Generator">🔗 Main Production Repo</a> · 
+  <a href="./docs/research-roadmap.md">Roadmap</a> · 
+  <a href="./papers/">Papers</a> · 
+  <a href="./tasks/ownership.md">Team Roles</a>
+</p>
 
 ---
 
-## Proposed AI-Assisted Workflow
+## What is this?
+
+This is our team's research notebook — not production code.
+
+We use this repo to read papers, sketch out architectures, run experiments, log findings, and stay aligned as a team. Think of it as our shared lab journal.
+
+The actual production codebase lives here → **[Forensic-Sketch-Generator](https://github.com/Sradha2474/Forensic-Sketch-Generator)**
+
+---
+
+## The Problem
+
+Forensic sketch creation still depends on a trained artist sitting with a witness for hours, drawing and redrawing based on verbal descriptions. It's slow, subjective, hard to scale, and bottlenecked by artist availability.
+
+We're building an AI system that takes a witness's natural language description and generates a forensic-quality sketch — with iterative refinement until the witness approves.
+
+> The keyword is **assist**, not replace. This tool supports investigators, it doesn't make legal decisions.
+
+---
+
+## How It Works
 
 ```mermaid
 graph TD
-    %% Workflow Diagram
-    A[Crime Occurs] --> B[Witness Text Description]
-    B --> C[NLU Parsing Engine]
-    C --> D[Facial Attribute Extraction]
-    D --> E[Generative Face model]
-    E --> F[Forensic Sketch Translation]
-    F --> G[Witness Feedback & Review]
-    G --> H{Revisions Needed?}
-    H -- Yes --> I[Update Description Details]
+    A[Crime Occurs] --> B[Witness Describes Suspect]
+    B --> C[AI Parses Description]
+    C --> D[Extracts Facial Attributes]
+    D --> E[Generates Face]
+    E --> F[Renders as Sketch]
+    F --> G[Witness Reviews]
+    G --> H{Good enough?}
+    H -- No --> I[Witness gives feedback]
     I --> D
-    H -- No --> J[Final Approved Sketch]
+    H -- Yes --> J[Final Sketch]
 
     style J fill:#a5d6a7,stroke:#2e7d32,stroke-width:2px
-    style G fill:#ffcc80,stroke:#ef6c00,stroke-width:2px
 ```
 
 ---
 
-## Core Research Modules
-We partition our research and model development into five modular components:
+## Research Modules
+
+Our pipeline breaks down into five modules. Each one is a separate research problem.
 
 ```mermaid
-flowchart TD
-    subgraph Inputs["Witness Description Input"]
-        Text["Natural Language Description<br><i>'Male, around 35, oval face...'</i>"]
-    end
-
-    subgraph Mod1["Module 1: Natural Language Understanding"]
-        NLU["NLU Text Parser<br><i>(Extracts Named Facial Features)</i>"]
-    end
-
-    subgraph Mod2["Module 2: Attribute Encoding"]
-        Enc["Attribute Encoder<br><i>(Maps JSON to Latent Spaces)</i>"]
-    end
-
-    subgraph Mod3["Module 3: Face Generation"]
-        Gen["Generative Model<br><i>(Synthesizes Photorealistic Image)</i>"]
-    end
-
-    subgraph Mod4["Module 4: Sketch Styling"]
-        Style["Sketch Renderer<br><i>(Style Transfer & Edge Processing)</i>"]
-    end
-
-    subgraph Mod5["Module 5: Identity Evaluation"]
-        Eval["Verification Engine<br><i>(ArcFace Embeddings Comparison)</i>"]
-    end
-
-    %% Flow connections
-    Text --> NLU
-    NLU -- "Structured JSON" --> Enc
-    Enc -- "Latent Vector (w)" --> Gen
-    Gen -- "Photo Output" --> Style
-    Style -- "Sketch Output" --> Final["Forensic Sketch"]
-
-    %% Evaluation & Identity preservation loop
-    Gen -. "Identity Check" .-> Eval
-    Eval -. "Cosine Similarity Score" .-> Gen
+flowchart LR
+    A["Text Input"] --> B["NLU Parser"]
+    B --> C["Attribute Encoder"]
+    C --> D["Face Generator"]
+    D --> E["Sketch Renderer"]
+    E --> F["Final Sketch"]
+    D -.-> G["Identity Evaluator"]
+    G -.-> D
 ```
 
-### Module 1 Parse Example
-* **Input Description:** *"Male, around 35, oval face, brown eyes, scar on left cheek"*
-* **Parsed Output (JSON):**
-  ```json
-  {
-    "gender": "male",
-    "age": 35,
-    "face_shape": "oval",
-    "eye_color": "brown",
-    "scar": "left_cheek"
-  }
-  ```
+| # | Module | What it does | We're exploring |
+|---|--------|-------------|-----------------|
+| 1 | **NLU Parser** | Turns witness text into structured JSON attributes | DistilBERT, self-attention, zero-shot LLMs |
+| 2 | **Attribute Encoder** | Maps JSON features to latent vectors | MLP mappers, projection layers |
+| 3 | **Face Generator** | Synthesizes a photorealistic face from latents | StyleGAN2-ADA, Diffusion Models |
+| 4 | **Sketch Renderer** | Converts the photo into a pencil-style forensic sketch | OpenCV, Neural Style Transfer, Pix2Pix |
+| 5 | **Identity Evaluator** | Checks if the sketch preserves identity vs ground truth | ArcFace, FaceNet, cosine similarity |
+
+<details>
+<summary><strong>Example: NLU Parser input → output</strong></summary>
+
+**Input:**
+> "Male, around 35, oval face, brown eyes, scar on left cheek"
+
+**Output:**
+```json
+{
+  "gender": "male",
+  "age": 35,
+  "face_shape": "oval",
+  "eye_color": "brown",
+  "scar": "left_cheek"
+}
+```
+</details>
 
 ---
 
-## Research Directory Map
-We organize our workspace directory structure by research scope and file type to maintain a clean environment:
+## Repo Structure
 
-| Directory | Scope & Purpose |
-| :--- | :--- |
-| **`docs/`** | Comprehensive problem analysis, roadmaps, literature review papers, and dataset briefs. |
-| **`papers/`** | Repository of academic PDFs (StyleGAN2, ArcFace, Attention, etc.) and structured summary files. |
-| **`architecture/`** | Sequence diagrams, training schedules, and inference pipelines represented in Mermaid formats. |
-| **`datasets/`** | Preprocessing scripts, data annotation schemas, and configuration for CelebA and FFHQ. |
-| **`paper-implementations/`** | Standalone boilerplate scripts for building and testing core paper layers from scratch. |
-| **`experiments/`** | Tracking logs, configuration variables, training performance checkpoints, and metrics. |
-| **`prototypes/`** | Jupyter Notebook playgrounds, sandbox models, and scratch preprocessing scripts. |
-| **`tasks/`** | Sprint plans, backlog charts, and task allocation metrics. |
-| **`resources/`** | Reading lists, video tutorials, external Git repositories, and web link bookmarks. |
+Click any folder to browse it directly.
 
----
-
-## Active Research Team
-We coordinate our tasks, review milestones, and discuss architecture decisions collectively.
-
-| Profile Picture | Researcher | Role | Core Responsibility | GitHub Profile |
-| :---: | :--- | :--- | :--- | :---: |
-| <img src="https://github.com/Sradha2474.png" width="80" height="80" style="border-radius:50%; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" alt="Sradha Avatar"/> | **Sradha** | *TBD* | *TBD* | [@Sradha2474](https://github.com/Sradha2474) |
-| <img src="https://github.com/Tusharkanta407.png" width="80" height="80" style="border-radius:50%; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" alt="Tushar Avatar"/> | **Tushar** | *TBD* | *TBD* | [@Tusharkanta407](https://github.com/Tusharkanta407) |
-| <img src="https://github.com/sandeepswain54.png" width="80" height="80" style="border-radius:50%; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" alt="Sandeep Avatar"/> | **Sandeep** | *TBD* | *TBD* | [@sandeepswain54](https://github.com/sandeepswain54) |
+| Folder | What's inside |
+|--------|--------------|
+| [**`docs/`**](./docs/) | Problem statement, literature review, roadmap, evaluation metrics, glossary |
+| [**`papers/`**](./papers/) | Paper summaries + downloaded PDFs (ArcFace, StyleGAN2, FaceNet, Attention, Pix2Pix) |
+| [**`architecture/`**](./architecture/) | Mermaid diagrams — system overview, training flow, inference pipeline |
+| [**`datasets/`**](./datasets/) | Dataset docs for CelebA, FFHQ, CUHK, and preprocessing pipelines |
+| [**`paper-implementations/`**](./paper-implementations/) | Our from-scratch implementations of core paper algorithms |
+| [**`experiments/`**](./experiments/) | Experiment logs, configs, and results (organized per experiment) |
+| [**`prototypes/`**](./prototypes/) | Sandbox code — notebooks, quick tests, early-stage modules |
+| [**`tasks/`**](./tasks/) | Sprint plans, backlog, and task ownership matrix |
+| [**`resources/`**](./resources/) | Books, YouTube links, GitHub repos, and references we find useful |
 
 ---
 
-## Collaboration Guidelines
-1. **Commit Hygiene:** We keep our model experiments inside `experiments/` and clean prototypes in `prototypes/`. We do not dump raw files in the root directory.
-2. **Reviewing Papers:** When we review a new paper, we update the `papers/README.md` index and write a summary following our markdown template.
-3. **Tracking Sprints:** We update task statuses inside `tasks/` before weekly alignment syncs.
+## Roadmap
+
+```mermaid
+graph LR
+    subgraph Phase 1
+        A[Literature Review] --> B[Dataset Setup]
+    end
+    subgraph Phase 2
+        B --> C[Text-to-Attribute Parser]
+    end
+    subgraph Phase 3
+        C --> D[Face Generation Prototypes]
+    end
+    subgraph Phase 4
+        D --> E[Sketch Rendering]
+        D --> F[Identity Evaluation]
+    end
+    subgraph Phase 5
+        E --> G[Integration into Main Repo]
+        F --> G
+    end
+```
+
+---
+
+## Team
+
+<table>
+  <tr>
+    <td align="center">
+      <a href="https://github.com/Sradha2474">
+        <img src="https://github.com/Sradha2474.png" width="100" height="100" style="border-radius:50%;" alt="Sradha"/><br/>
+        <strong>Sradha</strong>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/Tusharkanta407">
+        <img src="https://github.com/Tusharkanta407.png" width="100" height="100" style="border-radius:50%;" alt="Tushar"/><br/>
+        <strong>Tushar</strong>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/sandeepswain54">
+        <img src="https://github.com/sandeepswain54.png" width="100" height="100" style="border-radius:50%;" alt="Sandeep"/><br/>
+        <strong>Sandeep</strong>
+      </a>
+    </td>
+  </tr>
+</table>
+
+Detailed role assignments → [**tasks/ownership.md**](./tasks/ownership.md)
+
+---
+
+## How We Work
+
+- **Experiments** go in [`experiments/`](./experiments/) — one folder per experiment, each with an objective, results, and next steps.
+- **Paper reviews** follow a consistent template — see [`papers/README.md`](./papers/README.md) for the format.
+- **No random files** in root. Prototypes live in [`prototypes/`](./prototypes/), scratch code stays in experiments.
+- **Sprint tracking** happens in [`tasks/`](./tasks/) — we update before each weekly sync.
 
 ---
 
 ## License
-We license this research notebook under the **MIT License**. For details, see the LICENSE file in our main repository.
+
+MIT — see the LICENSE file in our [main repo](https://github.com/Sradha2474/Forensic-Sketch-Generator).
