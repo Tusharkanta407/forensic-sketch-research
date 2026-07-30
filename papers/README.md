@@ -1,62 +1,66 @@
-# 📚 Literature Review & Paper Summaries
+# Papers & Literature
 
-Every paper reviewed by the team must be summarized using the template below to maintain structured academic records.
-
-## 📝 Documented Papers
-
-* 📄 **Attention Is All You Need** — Transformer architecture, self-attention mechanisms.
-  * [Paper Summary](./attention-is-all-you-need.md) | [Download PDF](./attention-is-all-you-need.pdf)
-* 📄 **ArcFace** — Angular margin face recognition, identity evaluation.
-  * [Paper Summary](./arcface.md) | [Download PDF](./arcface.pdf)
-* 📄 **FaceNet** — Triplet loss embeddings, face verification.
-  * [Paper Summary](./facenet.md) | [Download PDF](./facenet.pdf)
-* 📄 **StyleGAN2** — Demodulated weights, high-quality face generation.
-  * [Paper Summary](./stylegan2.md) | [Download PDF](./stylegan2.pdf)
-* 📄 **StyleGAN (StyleGAN1)** — Style-based generator architecture.
-  * [Download PDF](./stylegan.pdf)
-* 📄 **Pix2Pix** — Image-to-image translation with conditional adversarial networks.
-  * [Download PDF](./pix2pix.pdf)
+All research papers we reference, organized by publisher.
 
 ---
 
-## 📋 Paper Summary Template
+## <img src="https://img.shields.io/badge/Concept_Papers-000000?style=for-the-badge&logo=bookstack&logoColor=white" alt="Concept"/> Foundational / Concept Papers
 
-Create a new file under `papers/<paper-name>.md` with the following template:
+Browse folder → [**`papers/concept/`**](./concept/)
+
+These are the core architectural papers our project is built on.
+
+| Paper | Topic | Files |
+|-------|-------|-------|
+| **Attention Is All You Need** | Transformer, self-attention | [Summary](./concept/attention-is-all-you-need.md) · [PDF](./concept/attention-is-all-you-need.pdf) |
+| **ArcFace** | Angular margin face recognition | [Summary](./concept/arcface.md) · [PDF](./concept/arcface.pdf) |
+| **FaceNet** | Triplet loss, face embeddings | [Summary](./concept/facenet.md) · [PDF](./concept/facenet.pdf) |
+| **StyleGAN2** | Weight demodulation, high-fidelity faces | [Summary](./concept/stylegan2.md) · [PDF](./concept/stylegan2.pdf) |
+| **StyleGAN** | Style-based generator architecture | [PDF](./concept/stylegan.pdf) |
+| **Pix2Pix** | Conditional image-to-image translation | [PDF](./concept/pix2pix.pdf) |
+
+---
+
+## <img src="https://img.shields.io/badge/IEEE-00629B?style=for-the-badge&logo=ieee&logoColor=white" alt="IEEE"/> IEEE Papers
+
+Browse folder → [**`papers/IEEE/`**](./IEEE/)
+
+| Paper | File |
+|-------|------|
+| A Realistic Image Generation of Face From Text Description Using Fully Trained GANs | [PDF](./IEEE/A_Realistic_Image_Generation_of_Face_From_Text_Description_Using_the_Fully_Trained_Generative_Adversarial_Networks.pdf) |
+| Improving Face Sketch Recognition via Adversarial Sketch-Photo Transformation | [PDF](./IEEE/Improving%20Face%20Sketch%20Recognition%20via%20Adversarial%20Sketch-Photo%20Transformation-1%20(1).pdf) |
+| Photo Synthesis | [PDF](./IEEE/Photo%20synthesis.pdf) |
+| Sketch-to-Photo | [PDF](./IEEE/Sketc-to-photo.pdf) |
+| Text to Face | [PDF](./IEEE/Text_to_face.pdf) |
+
+---
+
+## <img src="https://img.shields.io/badge/Elsevier-FF6C00?style=for-the-badge&logo=elsevier&logoColor=white" alt="Elsevier"/> Elsevier Papers
+
+Browse folder → [**`papers/ELSEVIER/`**](./ELSEVIER/)
+
+| Paper | File |
+|-------|------|
+| DCGAN | [PDF](./ELSEVIER/DCGAN.pdf) |
+
+---
+
+## Paper Summary Template
+
+When reviewing a new paper, create `papers/concept/<paper-name>.md` using this format:
 
 ```markdown
-# Paper Name: [Insert Title]
+# Paper Name: [Title]
 
 ## Authors
-* [Author 1, Author 2, ...]
-
 ## Year
-* [YYYY]
-
 ## Problem Statement
-* What problem is this paper trying to solve?
-
 ## Architecture
-* Explain the model structure and core components.
-
 ## Loss Function
-* Detail the loss functions used (with formulas if applicable).
-
 ## Input & Output
-* **Input:** [Format, shape, description]
-* **Output:** [Format, shape, description]
-
 ## Advantages
-* Why is this approach good?
-
 ## Limitations
-* What are the trade-offs or weaknesses?
-
 ## How can we use it?
-* How does this apply to the Forensic Sketch Generator project?
-
 ## Implementation Status
-* [Not Started | In Progress | Completed]
-
 ## Notes
-* Any additional ideas, references, or experimental results.
-```\n
+```

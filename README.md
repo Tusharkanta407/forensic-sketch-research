@@ -149,7 +149,19 @@ Click any folder to browse it.
   </tr>
   <tr>
     <td><a href="./papers/"><img src="https://img.shields.io/badge/📂_papers-1A237E?style=flat-square" alt="papers"/></a></td>
-    <td>Paper summaries + PDFs — ArcFace, StyleGAN2, FaceNet, Attention, Pix2Pix</td>
+    <td>Paper summaries + PDFs organized by publisher</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;<a href="./papers/concept/"><img src="https://img.shields.io/badge/concept-000000?style=flat-square&logo=bookstack&logoColor=white" alt="concept"/></a></td>
+    <td>Foundational papers — Attention, ArcFace, FaceNet, StyleGAN, StyleGAN2, Pix2Pix</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;<a href="./papers/IEEE/"><img src="https://img.shields.io/badge/IEEE-00629B?style=flat-square&logo=ieee&logoColor=white" alt="IEEE"/></a></td>
+    <td>Text-to-Face, Sketch-to-Photo, Face Sketch Recognition, Photo Synthesis</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;<a href="./papers/ELSEVIER/"><img src="https://img.shields.io/badge/Elsevier-FF6C00?style=flat-square&logo=elsevier&logoColor=white" alt="ELSEVIER"/></a></td>
+    <td>DCGAN and generative adversarial network research</td>
   </tr>
   <tr>
     <td><a href="./architecture/"><img src="https://img.shields.io/badge/📂_architecture-004D40?style=flat-square" alt="architecture"/></a></td>
