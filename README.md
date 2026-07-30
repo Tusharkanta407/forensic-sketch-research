@@ -228,8 +228,23 @@ graph LR
 
 ---
 
-### Team
+### Team & Guide
 
+#### 🎓 Project Guide & Advisor
+<table>
+  <tr>
+    <td align="center">
+      <a href="https://www.linkedin.com/in/dr-sukant-k-bisoy-21701176/">
+        <img src="./docs/images/sukant_bisoyi.png" width="100" height="100" style="border-radius:50%;" alt="Dr. Sukant K. Bisoyi"/><br/>
+        <sub><strong>Dr. Sukant K. Bisoyi</strong></sub><br/>
+        <sub>Dean & Professor, CSE Dept.</sub><br/>
+        <sub>C. V. Raman Global University</sub>
+      </a>
+    </td>
+  </tr>
+</table>
+
+#### 👥 Research Team
 <table>
   <tr>
     <td align="center">

@@ -2,7 +2,8 @@
 
 This file tracks ownership of our core modules and roles to keep our team aligned.
 
-## Team Summary
+## Team & Leadership Summary
+* **Dr. Sukant K. Bisoyi** (Project Guide & Advisor)
 * **Sradha** (Role TBD)
 * **Tushar** (Role TBD)
 * **Sandeep** (Role TBD)
