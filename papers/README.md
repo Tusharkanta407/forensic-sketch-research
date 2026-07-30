@@ -45,6 +45,17 @@ Browse folder → [**`papers/ELSEVIER/`**](./ELSEVIER/)
 
 ---
 
+## <img src="https://img.shields.io/badge/ResearchGate-00CCBB?style=for-the-badge&logo=researchgate&logoColor=white" alt="ResearchGate"/> ResearchGate Papers
+
+Browse folder → [**`papers/Research-GATE/`**](./Research-GATE/)
+
+| Paper | File |
+|-------|------|
+| Forensic Sketch Generation using Gen-AI | [PDF](./Research-GATE/forensic_GENAI.pdf) |
+| Crime Investigation using DCGAN by Forensic Sketch-to-Face Transformation (STF) - A Review | [PDF](./Research-GATE/nikkathbushraumacrime2021.pdf) |
+
+---
+
 ## Paper Summary Template
 
 When reviewing a new paper, create `papers/concept/<paper-name>.md` using this format:

@@ -164,6 +164,10 @@ Click any folder to browse it.
     <td>DCGAN and generative adversarial network research</td>
   </tr>
   <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;<a href="./papers/Research-GATE/"><img src="https://img.shields.io/badge/ResearchGate-00CCBB?style=flat-square&logo=researchgate&logoColor=white" alt="ResearchGate"/></a></td>
+    <td>Forensic sketch generation using Gen-AI and DCGAN review papers</td>
+  </tr>
+  <tr>
     <td><a href="./architecture/"><img src="https://img.shields.io/badge/📂_architecture-004D40?style=flat-square" alt="architecture"/></a></td>
     <td>Mermaid diagrams — system overview, training flow, inference pipeline</td>
   </tr>
